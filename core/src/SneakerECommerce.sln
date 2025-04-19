@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakerECommerce.Application", "SneakerECommerce.Application\SneakerECommerce.Application.csproj", "{438B6101-69BF-4DB1-988E-71E904EF6C6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerECommerce.Application", "SneakerECommerce.Application\SneakerECommerce.Application.csproj", "{438B6101-69BF-4DB1-988E-71E904EF6C6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakerECommerce.Domain", "SneakerECommerce.Domain\SneakerECommerce.Domain.csproj", "{A1700EE6-9F0E-47D1-92C7-83D4B4CD95E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerECommerce.Domain", "SneakerECommerce.Domain\SneakerECommerce.Domain.csproj", "{A1700EE6-9F0E-47D1-92C7-83D4B4CD95E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakerECommerce.Infrastructure", "SneakerECommerce.Infrastructure\SneakerECommerce.Infrastructure.csproj", "{7E09C2C8-A288-4D52-AE77-36F47102554E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerECommerce.Infrastructure", "SneakerECommerce.Infrastructure\SneakerECommerce.Infrastructure.csproj", "{7E09C2C8-A288-4D52-AE77-36F47102554E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakerECommerce.API", "SneakerECommerce.API\SneakerECommerce.API.csproj", "{0B2C8A1E-8D7C-4691-BA8D-288F5E70710E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakerECommerce.Presentation", "SneakerECommerce.Presentation\SneakerECommerce.Presentation.csproj", "{DD125CFB-CA15-4AF0-9913-4080A095EB9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerECommerce.API", "SneakerECommerce.API\SneakerECommerce.API.csproj", "{0B2C8A1E-8D7C-4691-BA8D-288F5E70710E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{0B2C8A1E-8D7C-4691-BA8D-288F5E70710E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B2C8A1E-8D7C-4691-BA8D-288F5E70710E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B2C8A1E-8D7C-4691-BA8D-288F5E70710E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD125CFB-CA15-4AF0-9913-4080A095EB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD125CFB-CA15-4AF0-9913-4080A095EB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD125CFB-CA15-4AF0-9913-4080A095EB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD125CFB-CA15-4AF0-9913-4080A095EB9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
