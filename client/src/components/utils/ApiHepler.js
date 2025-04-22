@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-axios.defaults.baseURL = "http://localhost:7010/api";
+axios.defaults.baseURL = "https://localhost:7010/api";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 class ApiHelper {
@@ -28,9 +28,9 @@ class ApiHelper {
     return axios({
       method: method,
       url: url,
-      data: data,
+      data,
       headers: headers,
-    });
+    }).then((res) => res.data);
   }
 }
 

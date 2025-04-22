@@ -90,3 +90,39 @@
     background: red;
     color: white;
 }
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-user-name {
+    padding: 4px 6px;
+}
+
+.nav-user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 1000;
+    min-width: 100px;
+}
+
+.nav-user-dropdown button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.nav-user-dropdown button:hover {
+    color: #ff4d4f;
+}

@@ -1,17 +1,16 @@
-import {
-  setToken,
-  getToken,
-  request,
-} from "../../components/utils/ApiHepler.js";
-import jwtDecode from "jwt-decode";
-export class authenticationService {
+import ApiHelper from "../../components/utils/ApiHepler";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
+
+class authenticationService {
   static async login(email, password) {
-    const response = await request("POST", "/auth/login", {
+    const response = await ApiHelper.request("POST", "/auth/login", {
       email,
       password,
     });
-    if (response.ok) {
-      setToken(response.data.token);
+    if (response.isSuccess === true) {
+      ApiHelper.setToken(response.data.token);
+
       return response.data.token;
     } else {
       throw new Error("Login failed");
@@ -19,12 +18,12 @@ export class authenticationService {
   }
 
   static async register(name, email, password) {
-    const response = await request("/auth/register", {
+    const response = await ApiHelper.request("POST", "/auth/register", {
       name,
       email,
       password,
     });
-    if (response.ok) {
+    if (response.isSuccess === true) {
       return response.data.token;
     } else {
       throw new Error("Registration failed");
@@ -32,11 +31,11 @@ export class authenticationService {
   }
 
   static logout() {
-    window.Cookies.remove("token");
+    Cookies.remove("token");
   }
 
   static getCurrentUser() {
-    const token = getToken();
+    const token = ApiHelper.getToken();
     if (token) {
       return JSON.parse(atob(token.split(".")[1]));
     }
@@ -44,14 +43,16 @@ export class authenticationService {
   }
   static parseToken = () => {
     try {
-      const token = getToken();
+      const token = ApiHelper.getToken();
       const decoded = jwtDecode(token);
-      const id = decoded.id;
-      const name = decoded.name;
-      const role = decoded.role;
+      const id = decoded.Id;
+      const name = decoded.Name;
+      const role = decoded.Role;
       return { id, name, role };
     } catch (err) {
       console.log(err);
     }
   };
 }
+
+export default authenticationService;

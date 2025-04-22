@@ -7,10 +7,11 @@ function App() {
   const location = useLocation(); // ✅ Get current location
 
   const isLoginPage = location.pathname === "/auth/login";
+  const isRegisterPage = location.pathname === "/auth/register";
 
   return (
     <>
-      {!isLoginPage && <Navbar />} <PublicRouter />
+      {!isLoginPage && !isRegisterPage && <Navbar />} <PublicRouter />
     </>
   );
 }
