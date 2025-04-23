@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sneaker_Ecommerce.Domain.Entity;
+using SneakerECommerce.Domain.Entity;
 
 namespace Sneaker_ECommerce.Infrastructure.Data
 {
@@ -20,5 +21,9 @@ namespace Sneaker_ECommerce.Infrastructure.Data
         public virtual DbSet<Wishlist> Wishlists { get; set; }
         public virtual DbSet<WishlistItem> WishlistItems { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
+
+
     }
 }

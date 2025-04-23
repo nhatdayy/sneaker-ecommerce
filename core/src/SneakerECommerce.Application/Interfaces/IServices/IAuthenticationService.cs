@@ -1,4 +1,5 @@
-﻿using StoreManagement.Application.DTOs.Auth;
+﻿using SneakerECommerce.Application.DTOs.Auth;
+using StoreManagement.Application.DTOs.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace SneakerECommerce.Application.Interfaces.IServices
         Task<AuthResult> Register(RegisterDTO registerDTO);
         Task<AuthResult> ChangePassword(ChangePasswordDTO changePasswordDTO);
         Task<AuthResult> ResetPassword(RestorePasswordDTO resetPasswordDTO);
+        Task<CheckToken> CheckAccessToken(string Token);
     }
 }

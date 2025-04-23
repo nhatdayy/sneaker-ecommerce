@@ -12,7 +12,7 @@ using Sneaker_ECommerce.Infrastructure.Data;
 namespace SneakerECommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250419102149_InitDbContext")]
+    [Migration("20250423030327_InitDbContext")]
     partial class InitDbContext
     {
         /// <inheritdoc />
@@ -24,6 +24,64 @@ namespace SneakerECommerce.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("SneakerECommerce.Domain.Entity.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ratingValue")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("SneakerECommerce.Domain.Entity.Voucher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Vouchers");
+                });
 
             modelBuilder.Entity("Sneaker_Ecommerce.Domain.Entity.CartItem", b =>
                 {
@@ -209,7 +267,7 @@ namespace SneakerECommerce.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Stock")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -406,6 +464,28 @@ namespace SneakerECommerce.Infrastructure.Migrations
                     b.ToTable("WishlistItems");
                 });
 
+            modelBuilder.Entity("SneakerECommerce.Domain.Entity.Rating", b =>
+                {
+                    b.HasOne("Sneaker_Ecommerce.Domain.Entity.Product", "Product")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("SneakerECommerce.Domain.Entity.Voucher", b =>
+                {
+                    b.HasOne("Sneaker_Ecommerce.Domain.Entity.Order", "Order")
+                        .WithMany("Voucher")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Sneaker_Ecommerce.Domain.Entity.CartItem", b =>
                 {
                     b.HasOne("Sneaker_Ecommerce.Domain.Entity.ShoppingCart", "ShoppingCart")
@@ -560,6 +640,13 @@ namespace SneakerECommerce.Infrastructure.Migrations
 
                     b.Navigation("Shipment")
                         .IsRequired();
+
+                    b.Navigation("Voucher");
+                });
+
+            modelBuilder.Entity("Sneaker_Ecommerce.Domain.Entity.Product", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("Sneaker_Ecommerce.Domain.Entity.ShoppingCart", b =>

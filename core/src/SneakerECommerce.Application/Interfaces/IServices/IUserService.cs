@@ -1,4 +1,5 @@
-﻿using SneakerECommerce.Application.DTOs.Request;
+﻿using SneakerECommerce.Application.Common;
+using SneakerECommerce.Application.DTOs.Request;
 using StoreManagement.Application.DTOs.Auth;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ namespace SneakerECommerce.Application.Interfaces.IServices
         Task<bool> DeleteAsync(int id);
         Task<UserDTO> UpdateAsync(UserDTO userDTO);
         Task<UserDTO> UpdatePasswordAsync(int id, string password);
+        Task<PaginationResult<List<UserDTO>>> GetAll(string currentPage, string pageSize, string searchTerm, string sortColumn, string asc);
     }
 }

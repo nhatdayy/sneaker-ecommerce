@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SneakerECommerce.Domain.Entity;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Sneaker_Ecommerce.Domain.Entity
         public string status { get; set; }
         public string ShippingAddress { get; set; }
         public virtual Collection<OrderItem> OrderItems {  get; set; }
+        public virtual Collection<Voucher>? Voucher { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual Shipment Shipment { get; set; }
     }
