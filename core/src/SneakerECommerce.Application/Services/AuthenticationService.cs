@@ -107,9 +107,24 @@ namespace SneakerECommerce.Application.Services
             }
         }
 
-        public Task<AuthResult> ResetPassword(RestorePasswordDTO resetPasswordDTO)
+        public async Task<bool> ResetPassword(RestorePasswordDTO resetPasswordDTO)
         {
-            throw new NotImplementedException();
+            if(resetPasswordDTO == null || string.IsNullOrEmpty(resetPasswordDTO.Email))
+            {
+                throw new Exception("Vui lòng nhập đầy đủ thông tin");
+            }
+            var user = await _userService.GetByEmalAsync(resetPasswordDTO.Email);
+            if (user != null) {
+                var newPassword = randomPassowrd();
+                var pashHash =  _jwtManager.getHashPassword(newPassword);
+                var userUpdated = await _userService.UpdatePasswordAsync(user.Id, pashHash);
+                if (userUpdated != null)
+                {
+                    SendEmailAsync(resetPasswordDTO.Email, newPassword);
+                    return true;
+                }
+            }
+            throw new Exception("Không thể gửi OTP");
         }
         private string randomPassowrd()
         {

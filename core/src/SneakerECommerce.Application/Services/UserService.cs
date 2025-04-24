@@ -5,6 +5,7 @@ using SneakerECommerce.Application.Interfaces.IServices;
 using StoreManagement.Application.DTOs.Auth;
 using AutoMapper;
 using SneakerECommerce.Application.DTOs.Request;
+using SneakerECommerce.Application.DTOs.Response;
 
 
 
@@ -50,16 +51,16 @@ namespace SneakerECommerce.Application.Services
             return _mapper.Map<UserDTO>(newUser);
         }
 
-        public async Task<UserDTO> GetByIdAsync(int id)
+        public async Task<UserResponse> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            return _mapper.Map<UserDTO>(user) ?? null;
+            return _mapper.Map<UserResponse>(user) ?? null;
         }
 
-        public async Task<UserDTO> GetByEmalAsync(string email)
+        public async Task<UserResponse> GetByEmalAsync(string email)
         {
             var user = await _userRepository.GetByEmailAsync(email);
-            return _mapper.Map<UserDTO>(user);
+            return _mapper.Map<UserResponse>(user);
         }
 
         public async Task<bool> DeleteAsync(int id)

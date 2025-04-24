@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
+using SneakerECommerce.Application.Common;
 using SneakerECommerce.Application.Interfaces.ICachingService;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SneakerECommerce.Application.InMemoryCache
 {
@@ -27,6 +29,25 @@ namespace SneakerECommerce.Application.InMemoryCache
                 return default;
             }
             return JsonSerializer.Deserialize<T>(data);
+        }
+
+        public T? GetPaginationData<T>(string key)
+        {
+            var data = _cache?.GetString(key);
+            string jsonContent = data;
+            if (data.StartsWith("data\""))
+            {
+                jsonContent = data.Substring(5, data.Length - 6);
+                jsonContent = System.Text.RegularExpressions.Regex.Unescape(jsonContent);
+            }
+
+            // Deserialize trực tiếp với options để xử lý case-insensitive
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<T>(jsonContent, options);
         }
 
         public object RemoveData(string key)

@@ -18,17 +18,14 @@ namespace SneakerECommerce.Application.Common
 
     public class Pagination : IPagination
     {
-        public int currentPage { get; private set; } = 1;
+        public int currentPage { get; set; } = 1;  
+        public int pageSize { get; set; } = 0;   
+        public int totalPage { get; set; } = 0;    
+        public int totalRecords { get; set; } = 0; 
+        public bool hasPrevPage { get; set; } = false; 
+        public bool hasNextPage { get; set; } = false; 
 
-        public int pageSize { get; private set; } = 0;
-
-        public int totalPage { get; private set; } = 0;
-
-        public int totalRecords { get; private set; } = 0;
-
-        public bool hasPrevPage { get; private set; } = false;
-
-        public bool hasNextPage { get; private set; } = false;
+        public Pagination() { } 
 
         public Pagination(int currentPage, int pageSize, int totalRecords)
         {
@@ -41,18 +38,19 @@ namespace SneakerECommerce.Application.Common
         }
     }
 
-    public interface IPagenationResult<T>
+    public interface IPaginationResult<T>
     {
         T List { get; }
 
         IPagination pagination { get; }
 
     }
-    public class PaginationResult<T> : IPagenationResult<T>
+    public class PaginationResult<T> : IPaginationResult<T>
     {
-        public T List { get; private set; }
+        public T List { get; set; } 
+        public IPagination pagination { get; set; } 
 
-        public IPagination pagination { get; private set; }
+        public PaginationResult() { }
 
         protected PaginationResult(T data, int currentPage, int pageSize, int totalRecords)
         {
@@ -64,6 +62,5 @@ namespace SneakerECommerce.Application.Common
         {
             return new PaginationResult<T>(data, currentPage, pageSize, totalRecords);
         }
-
     }
 }

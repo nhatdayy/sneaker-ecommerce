@@ -96,14 +96,25 @@ namespace SneakerECommerce.Infrastructure.Repositories
             return user;
         }
 
-        public Task<User> UpdateAsync(User user)
+        public async Task<User> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            var existUser = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id && x.IsDeleted == false);
+            if(existUser == null)
+            {
+                return null;
+            }
+            existUser.Name = user.Name;
+            existUser.Phone = user.Phone;
+            existUser.Address = user.Address;
+            existUser.Email = user.Email;
+            _dataContext.Users.Update(existUser);
+            await _dataContext.SaveChangesAsync();
+            return existUser;
         }
 
         public async Task<User> UpdatePasswordAsync(int id, string password, bool incluDeleted = false)
         {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id && x.Password == password && x.IsDeleted == incluDeleted);
+            var user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == incluDeleted);
             user.Password = password;
             _dataContext.Update(user);
             await _dataContext.SaveChangesAsync();

@@ -23,7 +23,7 @@ namespace SneakerECommerce.API.Controllers
         }
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<ActionResult> Register(RegisterDTO request)
+        public async Task<ActionResult<Result>> Register(RegisterDTO request)
         {
             var result = await _authenticationService.Register(request);
             if (result.errors.Any())
@@ -34,7 +34,7 @@ namespace SneakerECommerce.API.Controllers
         }
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginDTO request)
+        public async Task<ActionResult<Result>> Login(LoginDTO request)
         {
             var result = await _authenticationService.Login(request);
             if (result.errors.Any())
@@ -59,7 +59,7 @@ namespace SneakerECommerce.API.Controllers
         }
 
         [HttpPost("check-access-token")]
-        public async Task<ActionResult> CheckAccessToken([FromBody] TokenDTO req)
+        public async Task<ActionResult<Result>> CheckAccessToken([FromBody] TokenDTO req)
         {
             if (req == null)
             {
@@ -71,6 +71,12 @@ namespace SneakerECommerce.API.Controllers
                 return BadRequest(Result<CheckToken>.Failure("lấy thông tin thất bại"));
             }
             return Ok(Result<CheckToken>.Success(result, "Lấy thông tin thành công"));
+        }
+        [HttpPost("reset-password")]
+        public async Task<ActionResult> ResetPassword(RestorePasswordDTO restorePasswordDTO)
+        {
+            var result = await _authenticationService.ResetPassword(restorePasswordDTO);
+            return Ok(Result<AuthResult>.Success(result, "Gửi mail thành công"));
         }
     }
 }

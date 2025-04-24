@@ -15,7 +15,7 @@ namespace SneakerECommerce.Application.Interfaces.IRepositories
         Task<TUser> GetByIdAsync(int id, bool incluDeleted = false);
         Task<TUser> GetByEmailAsync(string email, bool incluDeleted = false);
         Task<TUser> UpdateAsync(TUser user);
-        Task<TUser> UpdatePasswordAsync(int id,string password, bool incluDeleted = false);
+        Task<TUser> UpdatePasswordAsync(int id, string password, bool incluDeleted = false);
         Task<IEnumerable<TUser>> GetAll(int currentPage = 1, int pageSize = 5, string searchTerm = "", string sortCol = "", bool ascSort = true, bool incluDeleted = false);
         Task<TUser> GetByLoginAsync(string email,string password);
         Task<int> CountAsync(string searchTerm);
